@@ -9,39 +9,106 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+<!--        <maven.compiler.source>17</maven.compiler.source>-->
+<!--        <maven.compiler.target>17</maven.compiler.target>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <cucumber.version>6.9.0</cucumber.version>
+        <maven.compiler.version>3.8.1</maven.compiler.version>
+        <maven.surefire.version>2.22.2</maven.surefire.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>4.2.2</version>
+        </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.17.0</version>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>1.2.5</version>
+            <version>7.15.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>7.15.0</version>
+            <version>${cucumber.version}</version>
             <scope>test</scope>
-
-            <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
-            <dependency>
-                <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-testng</artifactId>
-                <version>7.14.0</version>
-            </dependency>
-
         </dependency>
 
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.14.3</version>
+                <scope>test</scope>
+            </dependency>
 
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+        </dependency>
     </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.version}</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.version}</version>
+                <configuration>
+                    <includes>
+                        <include>**/ParallelRun.java</include>
+                    </includes>
+                    <parallel>methods</parallel>
+                    <threadCount>4</threadCount>
+                    <useUnlimitedThreads>false</useUnlimitedThreads>
+                </configuration>
+            </plugin>
+
+            <!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.0.0-M3</version> <executions> <execution> <goals> <goal>integration-test</goal>
+                </goals> <configuration> UNCOMMENT - To add any exclusions if required <excludes>
+                <exclude>**/*IT*.java</exclude> </excludes> <includes> UNCOMMENT BELOW LINE
+                - To execute feature files with a single runner <include>**/MyTestRunner.java</include>
+                UNCOMMENT BELOW LINE - To execute feature files with multiple runners <include>**/*Runner.java</include>
+                </includes> UNCOMMENT BELOW 3 LINES - To execute using parallel or combination
+                option <parallel>methods</parallel> <threadCount>4</threadCount> <perCoreThreadCount>true</perCoreThreadCount>
+                UNCOMMENT BELOW 3 LINES - To execute using forking or combination option
+                <forkCount>2</forkCount> <reuseForks>true</reuseForks> <reportsDirectory>${project.build.directory}/failsafe-reports_${surefire.forkNumber}</reportsDirectory>
+                </configuration> </execution> </executions> </plugin> -->
+
+
+        </plugins>
+    </build>
 
 </project>
