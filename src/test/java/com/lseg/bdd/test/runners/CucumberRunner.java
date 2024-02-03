@@ -14,7 +14,10 @@ import org.junit.runner.RunWith;
 //                "src/test/resources/features/loginFile.feature"
         },
         glue={"com.lseg.bdd.test.stepDefinitions"},
-        plugin = {"pretty","io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"}
+        plugin = {"pretty","io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
+                "html:target/cucumber-html-report",
+                "json:target/cucumber/cucumber.json",
+                "html:test-output"}
 //        monochrome = true,
 //        strict = true
 
