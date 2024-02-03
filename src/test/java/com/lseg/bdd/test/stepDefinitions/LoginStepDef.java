@@ -20,4 +20,10 @@ public class LoginStepDef {
         System.out.println("page");
     }
 
+    @Given("list of books1")
+    public void listOfBooks() {
+    }
+
+    public void listOfBooks12() {
+    }
 }
